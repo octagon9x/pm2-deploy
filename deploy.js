@@ -12,7 +12,8 @@ var path = require('path');
  * @callback cb
  */
 function spawn(hostJSON, args, cb) {
-  var shellSyntaxCommand = "echo '" + hostJSON + "' | \"" + __dirname.replace(/\\/g, '/') + "/deploy\" " + args.join(' ');
+  // uing --conf instead read conf on bash shell
+  var shellSyntaxCommand = '"' + __dirname.replace(/\\/g, '/') + '/deploy"' + " --conf '" + hostJSON + "' " + args.join(' ');
   var proc = childProcess.spawn('sh', ['-c', shellSyntaxCommand], { stdio: 'inherit' });
 
   proc.on('error', function(e) {
